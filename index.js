@@ -24,13 +24,13 @@ restService.post('/echo', function(req, res) {
 					for(var property2 in output[property1].schedule) {
 						var dateexcel = dateFormat(output[property1].schedule[property2].date, "yyyy-mm-dd");
 						if(dateexcel   == req.body.result.parameters.date){
-							string2 =   string2 + output[property1].firstname + "  "  +  output[property1].schedule[property2].starttime  + " : " + output[property1].schedule[property2].endtime +  ' ';
+							string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
 						}
 					}	
 
 				}
                 return res.json({
-                    speech: string2 + " are on schedule.",
+                    speech: " Sure. let me check and provide the detail; " +string2,
                     source: 'webhook-echo-one',
          
                 });
@@ -44,12 +44,12 @@ restService.post('/echo', function(req, res) {
 					for(var property2 in output[property1].schedule) {
 						var dateexcel = dateFormat(output[property1].schedule[property2].date, "yyyy-mm-dd");
 						if((output[property1].schedule[property2].status   == 0)&&(dateexcel   == req.body.result.parameters.date1)){
-							string3 =   string3 + output[property1].firstname + "  "  +  output[property1].schedule[property2].date + " " + output[property1].schedule[property2].status    + ' ';
+							string3 =   string3 + output[property1].firstname + " from  "  +  output[property1].schedule[property2].starttime + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location   + ' ; ';
 						}
 					}	
 				}
 				return res.json({
-                    speech: string3 + " are on leave.",
+                    speech: " Sure. Let me provide the list .  "+string3,
                     source: 'webhook-echo-one'
                 });
 			});
@@ -64,14 +64,14 @@ restService.post('/echo', function(req, res) {
 					for(var property2 in output[property1].schedule) {
 						var dateexcel = dateFormat(output[property1].schedule[property2].date, "yyyy-mm-dd");
 							if((output[property1].schedule[property2].status   == 1)&&(dateexcel   == req.body.result.parameters.date2)){
-							string1 =   string1 + output[property1].firstname + "  "  +  output[property1].schedule[property2].date + " " + output[property1].schedule[property2].status    + ' ';
+							string1 =   string1 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime + " to " + output[property1].schedule[property2].endtime  + " @ " + output[property1].schedule[property2].location  +  ' ; ';
 							}
 					}	
 
 				}
 				
 				return res.json({
-                    speech: string1 + " are available.",
+                    speech: "Yeah. I see few subs are available for the work;  "+string1,
                     source: 'webhook-echo-one'
                 });
 			});
