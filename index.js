@@ -56,13 +56,17 @@ restService.post('/echo', function(req, res) {
 				}
 				var givendate = dateFormat(req.body.result.parameters.date, "d f");
 				if(cntleave == 0){
-					var result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+". "+string2;
+					
+					if(req.body.result.parameters.location == ''){
+					 
+						var result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+". "+string2;
+						
+					}else{
+					 	var result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+" at "+ req.body.result.parameters.location.city +". "+string2;
+					}
+					
 				}else{
-				    if(req.body.result.parameters.location.city == ''){
-					var result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+". However "+cntleave+" have reported that the would not be able to make their shift.";	
-				    }else{
-				        var result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+" at "+ req.body.result.parameters.location.city +". However "+cntleave+" have reported that the would not be able to make their shift.";	
-				    }
+				    var result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+" at . However "+cntleave+" have reported that the would not be able to make their shift.";	
 				}
 				
                 return res.json({
