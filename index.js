@@ -34,13 +34,16 @@ restService.post('/echo', function(req, res) {
 							if(output[property1].schedule[property2].status   == 1){
 								
 								if(req.body.result.parameters.location != ''){
-									string2 = "with city";
+									string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
+									cntavail++;
 								}else{
 								  
-									string2 = "only date";
+									string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
+									cntavail++;
 								}
 							}else if(output[property1].schedule[property2].status   == 0){
-								string2 = "all";
+								string2 = "";
+								cntleave++;
 								
 							}
 							
