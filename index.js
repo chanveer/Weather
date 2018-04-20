@@ -68,7 +68,7 @@ restService.post('/echo', function(req, res) {
 			
 				
                 return res.json({
-                    speech: req.body.result.parameters.date,
+                    speech: req.body.result.parameters.value,
 		    source: 'webhook-echo-one',
          
                 });
