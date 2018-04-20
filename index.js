@@ -33,7 +33,7 @@ restService.post('/echo', function(req, res) {
 							
 							if(output[property1].schedule[property2].status   == 1){
 								
-								if(req.body.result.parameters.location.city != ''){
+								if(req.body.result.parameters.location != ''){
 									string2 = "with city";
 								}else{
 								  
