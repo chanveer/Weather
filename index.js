@@ -34,12 +34,10 @@ restService.post('/echo', function(req, res) {
 							if(output[property1].schedule[property2].status   == 1){
 								
 								if((req.body.result.parameters.location != '') && ( output[property1].schedule[property2].location == req.body.result.parameters.location.city)){
-									string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
-									cntavail++;
+									string2 =   "with city and date";
 								}else{
 								  
-									string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
-									cntavail++;
+									string2 =   "with date";
 								}
 							}else if(output[property1].schedule[property2].status   == 0){
 								string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
