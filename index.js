@@ -34,6 +34,11 @@ restService.post('/echo', function(req, res) {
 							if(output[property1].schedule[property2].status   == 1){
 								string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
 								cntavail++;
+							}else if(( output[property1].schedule[property2].location == req.body.result.parameters.location.city)){
+							 	
+								string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
+								cntavail++;
+							
 							}else if(output[property1].schedule[property2].status   == 0){
 								string2 = "";
 								cntleave++;
@@ -53,7 +58,11 @@ restService.post('/echo', function(req, res) {
 				if(cntleave == 0){
 					var result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+". "+string2;
 				}else{
+				    if(req.body.result.parameters.location.city == ''){
 					var result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+". However "+cntleave+" have reported that the would not be able to make their shift.";	
+				    }else{
+				        var result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+" at "+ req.body.result.parameters.location.city +". However "+cntleave+" have reported that the would not be able to make their shift.";	
+				    }
 				}
 				
                 return res.json({
