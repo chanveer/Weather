@@ -57,7 +57,7 @@ restService.post('/echo', function(req, res) {
 				
 				
                 return res.json({
-                    speech: req.body.result.parameters.location.city,
+                    speech: string2,
 		    source: 'webhook-echo-one',
          
                 });
