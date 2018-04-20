@@ -66,15 +66,28 @@ restService.post('/echo', function(req, res) {
 		    
 	 case "callSchedulefromdate":
 			
+		 callApi1data().then((output) => {
 				
-                return res.json({
-                    speech: req.body.result.parameters.value,
-		    source: 'webhook-echo-one',
-         
-                });
-	
-		break;
+				var string1 = "";
+			 	var cntavailsch = 0;
+				for(var property1 in output) {
+					for(var property2 in output[property1].schedule) {
+						var dateexcel = dateFormat(output[property1].schedule[property2].date, "yyyy-mm-dd");
+							if((output[property1].schedule[property2].status   == 1)&&(dateexcel   == req.body.result.parameters.date2)){
+								cntavailsch++;
+							}
+					}	
 
+				}
+			 var result = cntavailsch+" Employees are available to work as substitute today";
+				
+				return res.json({
+                    speech: result,
+                    source: 'webhook-echo-one'
+                });
+			});
+         break;		
+                
         case "callleave":
             callApi1data().then((output) => {
 				var string3 = "";
