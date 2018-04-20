@@ -34,16 +34,14 @@ restService.post('/echo', function(req, res) {
 							if(output[property1].schedule[property2].status   == 1){
 								
 								if(( output[property1].schedule[property2].location == req.body.result.parameters.location.city)){
-									string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
-									cntavail++;
+									string2 = "with city";
 								}else{
 								  
-									string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
-									cntavail++;
+									string2 = "only date";
 								}
 							}else if(output[property1].schedule[property2].status   == 0){
-								string2 = "";
-								cntleave++;
+								string2 = "all";
+								
 							}
 							
 							cnt++;
@@ -56,23 +54,10 @@ restService.post('/echo', function(req, res) {
 					}	
 
 				}
-				var givendate = dateFormat(req.body.result.parameters.date, "d f");
-				if(cntleave == 0){
-					
-					if(req.body.result.parameters.location == ''){
-					 
-						var result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+". "+string2;
-						
-					}else{
-					 	var result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+" at "+ req.body.result.parameters.location.city +". "+string2;
-					}
-					
-				}else{
-				    var result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+" at . However "+cntleave+" have reported that the would not be able to make their shift.";	
-				}
+				
 				
                 return res.json({
-                    speech: result,
+                    speech: string2,
 		    source: 'webhook-echo-one',
          
                 });
