@@ -22,20 +22,39 @@ restService.post('/echo', function(req, res) {
 				var string2 = "";
 				var cnt = 0;
 				
+				var cntavail = 0;
+				var cntleave = 0;
 				
 				for(var property1 in output) {
 					for(var property2 in output[property1].schedule) {
-						var dateexcel = dateFormat(output[property1].schedule[property2].date, "yyyy-mm-dd");
 						
+						var dateexcel = dateFormat(output[property1].schedule[property2].date, "yyyy-mm-dd");
 						if(dateexcel   == req.body.result.parameters.date){
-							string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
+							
+							if(output[property1].schedule[property2].status   == 1){
+								string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
+								cntavail++;
+							}else if(output[property1].schedule[property2].status   == 0){
+								string2 = "";
+								cntleave++;
+							}
+							
 							cnt++;
+							
+							
+							
 						}
+						
+						
 					}	
 
 				}
-				var givendate = dateFormat(req.body.result.parameters.date, "d n");
-				var result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+". "+string2;
+				var givendate = dateFormat(req.body.result.parameters.date, "d f");
+				if(cntleave == 0){
+					var result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+". "+string2;
+				}else{
+					var result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+". However "+cntleave+" have reported that the would not be able to make their shift.";	
+				}
 				
                 return res.json({
                     speech: result,
