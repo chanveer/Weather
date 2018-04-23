@@ -33,11 +33,17 @@ restService.post('/echo', function(req, res) {
 							
 							
 															
-							if(req.body.result.parameters.location == ''){
-								//string2 =   "with date";
-								string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
-								cntavail++;
-							}
+							if( req.body.result.parameters.location != ''){
+									//string2 =   "with city and date";
+									string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
+									cntavail++;
+									
+								}else{
+								  
+									//string2 =   "with date";
+									string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
+									cntavail++;
+								}
 	
 								
 							
