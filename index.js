@@ -60,7 +60,7 @@ restService.post('/echo', function(req, res) {
 				
 				
                 return res.json({
-                    speech: string2,
+                    speech: result,
 		    source: 'webhook-echo-one',
          
                 });
