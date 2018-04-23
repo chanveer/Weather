@@ -95,21 +95,26 @@ restService.post('/echo', function(req, res) {
         case "callleave":
             callApi1data().then((output) => {
 				var string3 = "";
+				var cntl = 0;
 				for(var property1 in output) {
 					for(var property2 in output[property1].schedule) {
 						var dateexcel = dateFormat(output[property1].schedule[property2].date, "yyyy-mm-dd");
 						if((output[property1].schedule[property2].status   == 0)&&(dateexcel   == req.body.result.parameters.date1)){
-							string3 =   string3 + output[property1].firstname + " from  "  +  output[property1].schedule[property2].starttime + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location   + ' ; ';
+							string3 =   string3 + output[property1].firstname + " @ " + output[property1].schedule[property2].location   + ' ; ';
+							cntl++;
 						}
 					}	
 				}
+				
+				var result;
+				result = "Sure.Total of "+cntl+" employess on planned leave for "+givendate+". They are "+string3;
+				
 				return res.json({
-                    speech: " Sure. Let me provide the list .  "+string3,
+                    speech: result,
                     source: 'webhook-echo-one'
                 });
 			});
         break;
-
 			
 		case "callAvail":
             callApi1data().then((output) => {
