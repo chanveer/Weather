@@ -105,7 +105,7 @@ restService.post('/echo', function(req, res) {
 						}
 					}	
 				}
-				
+				var givendate = dateFormat(req.body.result.parameters.date, "yyyy-mm-dd");
 				var result;
 				result = "Sure.Total of "+cntl+" employess on planned leave for "+givendate+". They are "+string3;
 				
