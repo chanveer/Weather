@@ -71,18 +71,19 @@ restService.post('/echo', function(req, res) {
 			
 		 callApi1data().then((output) => {
 				
-				var string1 = "";
+				var string4 = "";
 			 	var cntavailsch = 0;
 				for(var property1 in output) {
 					for(var property2 in output[property1].schedule) {
 						var dateexcel = dateFormat(output[property1].schedule[property2].date, "yyyy-mm-dd");
 							if((output[property1].schedule[property2].status   == 1)&&(dateexcel   == req.body.result.parameters.value)){
+								string4 =   string4 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';		
 								cntavailsch++;
 							}
 					}	
 
 				}
-			 var result = cntavailsch+" Employees are available to work as substitute today";
+			 var result = cntavailsch+" Employees are available to work as substitute and they are :"+string4;
 				
 				return res.json({
                     speech: result,
