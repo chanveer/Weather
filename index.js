@@ -27,42 +27,40 @@ restService.post('/echo', function(req, res) {
 				
 				for(var property1 in output) {
 					for(var property2 in output[property1].schedule) {
-						
 						var dateexcel = dateFormat(output[property1].schedule[property2].date, "yyyy-mm-dd");
 						if(dateexcel   == req.body.result.parameters.date){
-							
-							
-															
-							if( (req.body.result.parameters.any != '') && ( output[property1].schedule[property2].location == req.body.result.parameters.any)){
-									//string2 =   "with city and date";
-									string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
-									cntavail++;
-								//string2 = string2 + output[property1].schedule[property2].location + "  "  +  req.body.result.parameters.any  + " ; ";
-									
+							if(output[property1].schedule[property2].status   == 1){
+								if( (req.body.result.parameters.any != '') && ( output[property1].schedule[property2].location == req.body.result.parameters.any)){
+										string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
+										cntavail++;
 								}
-							if(req.body.result.parameters.any == ''){
-								  
-									//string2 =   "with date";
+								if(req.body.result.parameters.any == ''){
 									string2 =   string2 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime  + " to " + output[property1].schedule[property2].endtime + " @ " + output[property1].schedule[property2].location +  ' ; ';
 									cntavail++;
+								}	
 							}
-	
-								
+							
+							if(output[property1].schedule[property2].status   == 0){
+								string2 = "";
+								cntleave++;
+							}
 							
 							cnt++;
-							
-							
+							var givendate = dateFormat(req.body.result.parameters.date, "d f");	
+							var result = "";
+							if(cntleave != 0){
+								result = "All are available";
+							}else{
+								result = "Some are available";
+							}
 							
 						}
-						
-						
 					}	
-
 				}
 				
 				
                 return res.json({
-                    speech: string2,
+                    speech: result,
 		    source: 'webhook-echo-one',
          
                 });
