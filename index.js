@@ -132,7 +132,7 @@ restService.post('/echo', function(req, res) {
 						var dateexcel = dateFormat(output[property1].schedule[property2].date, "yyyy-mm-dd");
 							if((output[property1].schedule[property2].status   == 1)&&(dateexcel   == req.body.result.parameters.date2)){
 							string1 =   string1 + output[property1].firstname + " from "  +  output[property1].schedule[property2].starttime + " to " + output[property1].schedule[property2].endtime  + " @ " + output[property1].schedule[property2].location  +  ' ; ';
-							string1 = os.EOL;
+							//string1 = os.EOL;
 							}
 					}	
 
