@@ -46,10 +46,10 @@ restService.post('/echo', function(req, res) {
 							}
 							
 							cnt++;
-							var givendate = dateFormat(req.body.result.parameters.date, "yyyy-mm-dd");	
+							var givendate = dateFormat(req.body.result.parameters.date, "dd-mmm-yyyy");	
 							var result = "";
 							if(cntleave != 0){       // including present as well as absent;
-								result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+" at . However "+cntleave+" have reported that the would not be able to make their shift.";
+								result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+" . However "+cntleave+" have reported that the would not be able to make their shift.";
 							}else{
 								var result = "Sure.Total of "+cnt+" employess on schedule for "+givendate+". "+string2;
 							}
